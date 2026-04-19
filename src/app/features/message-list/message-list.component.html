@@ -1,0 +1,42 @@
+<div class="message-list" #scrollContainer>
+  @if (!chatService.hasMessages()) {
+    <div class="empty-state">
+      <div class="empty-state__icon">✦</div>
+      <h2>Start the conversation</h2>
+      <p>
+        Your selected persona is ready. Ask anything and the chat will begin in
+        that style.
+      </p>
+    </div>
+  } @else {
+    @for (message of chatService.messages(); track message.id) {
+      <article
+        class="message-bubble"
+        [class.message-bubble--user]="message.role === 'user'"
+        [class.message-bubble--assistant]="message.role === 'assistant'"
+        [class.message-bubble--error]="message.isError"
+      >
+        @if (message.role === 'assistant') {
+          <div class="message-bubble__persona">
+            {{ personaService.getPersonaById(message.personaId || '')?.title || 'Assistant' }}
+          </div>
+        }
+
+        <p class="message-bubble__text">{{ message.text }}</p>
+
+        <div class="message-bubble__meta">
+          <span>{{ message.createdAt | date:'shortTime' }}</span>
+        </div>
+      </article>
+    }
+
+    @if (chatService.isSending()) {
+      <article class="message-bubble message-bubble--assistant message-bubble--typing">
+        <div class="message-bubble__persona">
+          {{ personaService.selectedPersona()?.title || 'Assistant' }}
+        </div>
+        <app-loading-dots label="Typing" />
+      </article>
+    }
+  }
+</div>

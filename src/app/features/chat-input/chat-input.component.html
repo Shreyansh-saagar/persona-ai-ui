@@ -1,0 +1,32 @@
+<div class="chat-input">
+  <div class="chat-input__field">
+    <textarea
+      #messageTextarea
+      class="chat-input__textarea"
+      rows="1"
+      placeholder="Type your message..."
+      [ngModel]="message()"
+      (ngModelChange)="message.set($event)"
+      (input)="onInput($event)"
+      (keydown)="onKeydown($event)"
+      [disabled]="chatService.isSending()"
+    ></textarea>
+
+    <button
+      type="button"
+      class="chat-input__send"
+      (click)="sendMessage()"
+      [disabled]="!message().trim() || chatService.isSending()"
+    >
+      @if (chatService.isSending()) {
+        <span>...</span>
+      } @else {
+        <span>Send</span>
+      }
+    </button>
+  </div>
+
+  <p class="chat-input__hint">
+    Press Enter to send · Shift + Enter for a new line
+  </p>
+</div>

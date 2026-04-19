@@ -1,0 +1,37 @@
+<section class="chat-page">
+  <div class="chat-page__shell">
+    <header class="chat-page__header">
+      <div class="chat-page__left">
+        <button type="button" class="icon-btn icon-btn--back" (click)="goBack()">
+          ←
+        </button>
+
+        <div class="chat-page__title-wrap">
+          <span class="chat-page__eyebrow">Current style</span>
+          <h1>{{ personaService.selectedPersona()?.title || 'Chat' }}</h1>
+          <p class="chat-page__subtitle">
+            {{ personaService.selectedPersona()?.description }}
+          </p>
+        </div>
+      </div>
+
+      <div class="chat-page__right">
+        @if (personaService.hasMultiplePersonas()) {
+          <app-persona-switcher />
+        }
+
+        <!-- <button type="button" class="icon-btn icon-btn--clear" (click)="clearChat()">
+          Clear
+        </button> -->
+      </div>
+    </header>
+
+    <main class="chat-page__body">
+      <app-message-list />
+    </main>
+
+    <footer class="chat-page__footer">
+      <app-chat-input />
+    </footer>
+  </div>
+</section>

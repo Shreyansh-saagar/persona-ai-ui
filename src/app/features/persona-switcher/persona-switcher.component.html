@@ -1,0 +1,16 @@
+<div class="switcher">
+  <label class="switcher__label" for="persona-select">Change style of your chat:</label>
+
+  <select
+    id="persona-select"
+    class="switcher__select"
+    [value]="personaService.selectedPersona()?.id ?? ''"
+    (change)="onPersonaChange($event)"
+  >
+    @for (persona of personaService.personas(); track persona.id) {
+      <option [value]="persona.id">
+        {{ persona.title }}
+      </option>
+    }
+  </select>
+</div>

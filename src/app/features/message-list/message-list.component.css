@@ -1,0 +1,124 @@
+:host {
+  display: block;
+  height: 100%;
+  min-height: 0;
+}
+
+.message-list {
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scroll-behavior: smooth;
+}
+
+.empty-state {
+  margin: auto;
+  width: 100%;
+  max-width: 420px;
+  border: 1px dashed #cbd5e1;
+  background: rgba(255, 255, 255, 0.84);
+  border-radius: 22px;
+  padding: 24px 18px;
+  text-align: center;
+}
+
+.empty-state__icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 12px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: linear-gradient(
+    135deg,
+    rgba(250, 204, 21, 0.2),
+    rgba(59, 130, 246, 0.16)
+  );
+  color: #1e3a8a;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.empty-state h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #0f172a;
+}
+
+.empty-state p {
+  margin: 8px 0 0;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.message-bubble {
+  max-width: 85%;
+  padding: 10px 12px;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  word-break: break-word;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+}
+
+.message-bubble--assistant {
+  align-self: flex-start;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #0f172a;
+}
+
+.message-bubble--user {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff;
+  border: none;
+}
+
+.message-bubble--error {
+  background: #fff7f7;
+  border-color: #fecaca;
+}
+
+.message-bubble--typing {
+  background: #f8fafc;
+}
+
+.message-bubble__persona {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #15803d;
+}
+
+.message-bubble__text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.message-bubble__meta {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.message-bubble--user .message-bubble__meta {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+@media (min-width: 768px) {
+  .message-bubble {
+    max-width: 72%;
+    padding: 12px 14px;
+  }
+}

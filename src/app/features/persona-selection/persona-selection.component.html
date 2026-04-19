@@ -1,0 +1,69 @@
+<section class="persona-page">
+  <div class="persona-page__bg persona-page__bg--blue"></div>
+  <div class="persona-page__bg persona-page__bg--yellow"></div>
+
+  <div class="persona-page__shell">
+    <header class="persona-page__header">
+      <span class="persona-page__badge">Persona AI</span>
+      <h1>Pick a chat style</h1>
+      <p>
+        Choose how you want the assistant to respond. You can switch styles
+        later during the conversation too.
+      </p>
+    </header>
+
+    @if (personaService.isLoading()) {
+      <div class="state-card">
+        <app-loading-dots label="Loading personas" />
+      </div>
+    } @else if (personaService.loadError()) {
+      <div class="state-card state-card--error">
+        <h2>Could not load personas</h2>
+        <p>{{ personaService.loadError() }}</p>
+        <button type="button" class="primary-btn" (click)="retryLoad()">
+          Try again
+        </button>
+      </div>
+    } @else if (!personaService.hasPersonas()) {
+      <div class="state-card">
+        <h2>No personas found</h2>
+        <p>Please check your backend and try again.</p>
+      </div>
+    } @else {
+      <section class="persona-list">
+        @for (persona of personaService.personas(); track persona.id) {
+          <button
+            type="button"
+            class="persona-card"
+            (click)="selectPersona(persona)"
+          >
+            <div class="persona-card__accent"></div>
+
+            <div class="persona-card__main">
+              <div class="persona-card__avatar">
+                {{ persona.title.charAt(0).toUpperCase() }}
+              </div>
+
+              <div class="persona-card__content">
+                <div class="persona-card__row">
+                  <h2>{{ persona.title }}</h2>
+                  <span class="persona-card__tag">Style</span>
+                </div>
+
+                <p class="persona-card__name">{{ persona.name }}</p>
+                <p class="persona-card__description">
+                  {{ persona.description }}
+                </p>
+              </div>
+            </div>
+
+            <div class="persona-card__footer">
+              <span>Choose this style</span>
+              <span class="persona-card__arrow">→</span>
+            </div>
+          </button>
+        }
+      </section>
+    }
+  </div>
+</section>
